@@ -28,6 +28,9 @@ class Joke(models.Model):
     @property
     def punchline(self):
         return re.search(r"{(.*)}(?s)", self.body).group(1)
+    
+    def __str__(self):
+        return self.body
 
 
 class CombinedJoke(models.Model):
