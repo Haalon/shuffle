@@ -28,6 +28,9 @@ class Joke(models.Model):
     @property
     def punchline(self):
         return re.search(r"{(.*)}(?s)", self.body).group(1)
+
+    def replace_punchline(self, new_punchline):
+        return re.sub(r"{.*}(?s)", new_punchline, self.body)
     
     def __str__(self):
         return self.body
@@ -45,3 +48,7 @@ class CombinedJoke(models.Model):
 
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
+
+    @property
+    def body(self):
+        return self.destination.replace_punchline(self.source.punchline)
