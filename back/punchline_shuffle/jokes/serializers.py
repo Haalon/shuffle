@@ -14,4 +14,4 @@ class CombinedJokeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CombinedJoke
-        fields = ('body', 'upvotes', 'downvotes', 'source', 'destination')
+        fields = ('pk', 'body', 'upvotes', 'downvotes', 'source', 'destination')

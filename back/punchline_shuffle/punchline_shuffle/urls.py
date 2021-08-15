@@ -20,5 +20,6 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api/jokes/generate', views.generate_joke),
+    path('api/jokes/combined/generate', views.generate_joke),
+    path('api/jokes/combined/react/<int:pk>', views.react),
 ]
