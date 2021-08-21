@@ -50,5 +50,19 @@ class CombinedJoke(models.Model):
     downvotes = models.IntegerField(default=0)
 
     @property
-    def body(self):
-        return self.destination.replace_punchline(self.source.punchline)
+    def corrected_punchline(self):
+        punch = self.source.punchline
+        if self.destination.capitalize:
+            punch = punch[:1].upper() + punch[1:]
+        else:
+            punch = punch[:1].lower() + punch[1:]
+        
+        return punch
+
+    @property
+    def body(self):     
+        return self.destination.replace_punchline(self.corrected_punchline)
+    
+    def __str__(self):
+        return self.body
+
