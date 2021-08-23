@@ -49,6 +49,9 @@ class CombinedJoke(models.Model):
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ['-upvotes']
+
     @property
     def corrected_punchline(self):
         punch = self.source.punchline
