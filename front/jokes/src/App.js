@@ -1,5 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import JokeAPI from './JokeAPI';
+
+const jokeAPI = new JokeAPI();
+window.jokeAPI = jokeAPI;
 
 function App() {
   return (

@@ -18,11 +18,11 @@ class JokeViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = JokeSerializer
 
 
-class CombinedJokeViewSet(viewsets.ModelViewSet):
+class CombinedJokeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CombinedJoke.objects.all()
     serializer_class = CombinedJokeSerializer
 
-    @action(detail=False)
+    @action(detail=False, methods=['get'])
     def generate(self, request):
         lang = request.query_params.get('lang', 'RU')
         
