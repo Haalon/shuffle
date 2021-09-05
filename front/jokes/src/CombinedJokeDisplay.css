@@ -1,0 +1,32 @@
+.container {
+    min-height: 90vmin;
+    min-height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5vmin;
+    color: aliceblue;
+    background-color: #282c34;
+}
+
+button {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 4vmin;
+    box-shadow: none;
+    border: none;
+    background-color: #303744;
+    color: aliceblue;
+    padding: 5vmin;
+    border-radius: 5vmin;
+}
+
+button:hover {
+    background-color: #485264;
+}
+
+.jokeDisplay {
+    font-family: 'Lobster';
+    white-space: pre-line;
+    font-size: 8vmin;
+}
