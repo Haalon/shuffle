@@ -26,6 +26,31 @@ class CombinedJokeDisplay extends Component {
         this.generateNewCombinedJoke();
     }
 
+    getText() {
+        if (!this.state.combinedJoke) return (<span></span>);
+
+        const destText = this.state.combinedJoke.destination.body;
+        const punchline = this.state.combinedJoke.corrected_punchline;
+
+        const combText = destText.replace(/\{.*?\}/, `|&${punchline}|`);
+        const parts = combText.split('|');
+        const tagParts = parts.map((txt, i) => {
+            if (txt[0] == '&') return (
+                <u key={i}>
+                    {txt.slice(1)}
+                </u>
+            )
+            return (
+                <span key={i}>
+                    {txt}
+                </span>
+            )
+        })
+
+        return tagParts;
+    }
+
+
     render() {
         if (!this.state.combinedJoke) return <div>Not loaded yet</div>;
 
@@ -33,7 +58,7 @@ class CombinedJokeDisplay extends Component {
         return (
             <div className="container">
                 <p className="jokeDisplay">
-                    {this.state.combinedJoke.body}
+                    {this.getText()}
                 </p>
                 <button onClick={e => this.generateNewCombinedJoke()}>
                     Generate new Joke
