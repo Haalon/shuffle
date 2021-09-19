@@ -28,9 +28,12 @@ class CombinedJokeViewSet(viewsets.ReadOnlyModelViewSet):
         
         try:
             src = Joke.objects.filter(use_as_source=True, lang=lang).order_by('?')[0]
-            dst = Joke.objects.filter(use_as_destination=True, lang=lang).order_by('?')[0]
-            while src == dst:
-                dst = Joke.objects.filter(use_as_destination=True, lang=lang).order_by('?')[0]
+            dst = (
+                Joke.objects
+                .filter(use_as_destination=True, lang=lang)
+                .exclude(pk=src.pk)
+                .order_by('?')[0]
+            )
         except Exception:
             return Response("Unable to generate a joke", status=status.HTTP_501_NOT_IMPLEMENTED)
 
