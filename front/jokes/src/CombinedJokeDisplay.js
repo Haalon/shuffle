@@ -57,12 +57,20 @@ class CombinedJokeDisplay extends Component {
         console.log(this.state.combinedJoke.body);
         return (
             <div className="container">
-                <p className="jokeDisplay">
+                <div className="display">
                     {this.getText()}
-                </p>
-                <button onClick={e => this.generateNewCombinedJoke()}>
-                    Generate new Joke
-                </button>
+                </div>
+                <div className="button-section">
+                    <div className="button button_border_left">
+                        Show origin
+                    </div>
+                    <div className="button button_border_center" onClick={e => this.generateNewCombinedJoke()}>
+                        Generate new Joke
+                    </div>
+                    <div className="button button_border_right">
+                        Show destination
+                    </div>
+                </div>
             </div>
         )
     }
