@@ -25,9 +25,11 @@ export default class JokeAPI{
         return axios.get(url).then(response => response.data);
     }
 
-    generateCombinedJoke(lang) {
+    generateCombinedJoke(lang, dst, src) {
         lang = lang || 'RU';
-        const url = `${API_URL}/api/combined_jokes/generate/?lang=${lang}`;
+        let url = `${API_URL}/api/combined_jokes/generate/?lang=${lang}`;
+        if (dst) url += '&dst=' + dst.toString();
+        if (src) url += '&src=' + src.toString()
         return axios.get(url).then(response => response.data);
     }
 

@@ -5,7 +5,7 @@ class JokeSerializer(serializers.ModelSerializer):
     punchline = serializers.ReadOnlyField()
     class Meta:
         model = Joke
-        fields = ('body', 'created', 'lang', 'punchline')
+        fields = ('pk', 'body', 'created', 'lang', 'punchline')
 
 
 class CombinedJokeSerializer(serializers.ModelSerializer):

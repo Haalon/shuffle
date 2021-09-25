@@ -25,15 +25,24 @@ class CombinedJokeViewSet(viewsets.ReadOnlyModelViewSet):
     @action(detail=False, methods=['get'])
     def generate(self, request):
         lang = request.query_params.get('lang', 'RU')
+        src_pk = request.query_params.get('src')
+        dst_pk = request.query_params.get('dst')
         
         try:
-            src = Joke.objects.filter(use_as_source=True, lang=lang).order_by('?')[0]
-            dst = (
-                Joke.objects
-                .filter(use_as_destination=True, lang=lang)
-                .exclude(pk=src.pk)
-                .order_by('?')[0]
-            )
+            if src_pk:
+                src = Joke.objects.get(pk=int(src_pk))
+            else:
+                src = Joke.objects.filter(use_as_source=True, lang=lang).order_by('?')[0]
+            
+            if dst_pk:
+                dst = Joke.objects.get(pk=int(dst_pk))
+            else:
+                dst = (
+                    Joke.objects
+                    .filter(use_as_destination=True, lang=lang)
+                    .exclude(pk=src.pk)
+                    .order_by('?')[0]
+                )
         except Exception:
             return Response("Unable to generate a joke", status=status.HTTP_501_NOT_IMPLEMENTED)
 
