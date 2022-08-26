@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -95,11 +96,11 @@ WSGI_APPLICATION = 'punchline_shuffle.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'shuffle',
-        'USER': 'root',
-        'PASSWORD': 'secret',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.environ.get('MYSQL_DATABASE') or 'shuffle',
+        'USER': os.environ.get('MYSQL_USER') or 'root',
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD') or 'secret',
+        'HOST': os.environ.get('MYSQL_HOST') or 'localhost',
+        'PORT': os.environ.get('MYSQL_PORT') or '3306',
     }
 }
 

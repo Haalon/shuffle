@@ -1,6 +1,31 @@
 version: "3.8"
 
 services:
+  front:
+    build: ./front/jokes
+    # stdin_open: true
+    ports:
+      - 3000:3000
+    volumes:
+      - './front/jokes:/app'
+      - '/app/node_modules'
+    environment:
+      - CHOKIDAR_USEPOLLING=true 
+    depends_on:
+      - back
+  back:
+    build: ./back
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    environment: 
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: shuffle
+      MYSQL_USER: root
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+    depends_on:
+      - mysql
   mysql:
     image: mysql:5.7
     command: --character-set-server=utf8mb4
