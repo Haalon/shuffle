@@ -18,6 +18,7 @@
     color: aliceblue;
     padding: 12px;
     border-radius: 5vmin;
+    user-select: none;
 }
 
 .button:hover {
@@ -32,8 +33,16 @@
     border-radius: 0 5vmin 5vmin 0;
 }
 
+.button_border_single {
+    border-radius: 5vmin;
+}
+
 .button_border_center {
     border-radius: 0;
+}
+
+.button-highlight {
+    background-color: #59606e;
 }
 
 .display {
@@ -48,11 +57,19 @@
 
 .button-section {
     width: 100%;
-    background: linear-gradient(#282c34, #16181d);;
+   
     /* background-color: #373c46; */
     height: 15vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.button-section--bottom {
+    background: linear-gradient(#282c34, #16181d);
+}
+
+.button-section--top {
+    background: linear-gradient( #16181d, #282c34);
 }
