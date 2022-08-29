@@ -9,4 +9,4 @@ RUN pip install -r requirements.txt
 COPY  . /app/
 
 WORKDIR /app/punchline_shuffle
-RUN python manage.py migrate
+# RUN python manage.py migrate
