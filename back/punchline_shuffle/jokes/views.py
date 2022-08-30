@@ -5,10 +5,13 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.throttling import AnonRateThrottle
 
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
 from django.db.models import F
 
 from .models import Joke, CombinedJoke
 from .serializers import *
+from django_filters.rest_framework import DjangoFilterBackend
 
 class OncePerDayAnonThrottle(AnonRateThrottle):
     rate = '1/day'
@@ -17,12 +20,21 @@ class JokeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Joke.objects.all()
     serializer_class = JokeSerializer
 
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {
+        'lang': ['exact'],
+        'created': ['exact', 'gt', 'lt']
+        }
+
 
 class CombinedJokeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CombinedJoke.objects.all()
     serializer_class = CombinedJokeSerializer
 
-    @action(detail=False, methods=['get'])
+    permission_classes = [IsAuthenticated]
+
+    @action(detail=False, methods=['get'], permission_classes=[AllowAny])
     def generate(self, request):
         lang = request.query_params.get('lang', 'RU')
         src_pk = request.query_params.get('src')
