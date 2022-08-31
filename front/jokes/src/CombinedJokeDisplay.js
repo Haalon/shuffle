@@ -1,14 +1,13 @@
-import JokeAPI from './JokeAPI';
 import './CombinedJokeDisplay.css';
 import { useState, useEffect } from 'react';
+import { useApi } from './api/useApi';
 
-const jokeAPI = new JokeAPI();
-window.jokeAPI = jokeAPI;
 
 function CombinedJokeDisplay(props) {
-    const [lang, setLang] = useState('RU');
+    const [lang] = useState('RU');
     const [combinedJoke, setCombinedJoke] = useState(null)
     const [display, setDisplay] = useState('combined')
+    const api = useApi();
 
     const getButtionHighlight = (display_) => {
         if (display === display_) return 'button-highlight';
@@ -54,7 +53,7 @@ function CombinedJokeDisplay(props) {
     }
 
     const generateNewCombinedJoke = async () => {
-        const result = await jokeAPI.generateCombinedJoke(lang);
+        const result = await api.generateCombinedJoke(lang);
         setDisplay('combined')
         setCombinedJoke(result);
     }

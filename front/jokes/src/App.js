@@ -1,9 +1,12 @@
 import './App.css';
 import CombinedJokeDisplay from './CombinedJokeDisplay.js'
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <CombinedJokeDisplay/>
+    <AuthProvider>
+      <CombinedJokeDisplay/>
+    </AuthProvider>
   );
 }
 
