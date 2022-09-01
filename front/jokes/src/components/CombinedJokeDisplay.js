@@ -1,6 +1,6 @@
 import './CombinedJokeDisplay.css';
 import { useState, useEffect } from 'react';
-import { useApi } from './api/useApi';
+import { useApi } from '../api/useApi';
 
 
 function CombinedJokeDisplay(props) {

@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
-import { useHistory } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import {useNavigate} from "react-router-dom"
 
 const AuthContext = createContext();
 
@@ -19,12 +19,12 @@ export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(() =>
         localStorage.getItem("authTokens")
-            ? jwt_decode(localStorage.getItem("authTokens"))
+            ? jwtDecode(localStorage.getItem("authTokens"))
             : null
     );
     const [loading, setLoading] = useState(true);
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const loginUser = async (username, password) => {
         const response = await fetch(`${auth_root}/login/`, {
@@ -41,12 +41,22 @@ export const AuthProvider = ({ children }) => {
 
         if (response.status === 200) {
             setAuthTokens(data);
-            setUser(jwt_decode(data.access));
+            const us = jwtDecode(data.access)
+            console.log(us);
+            setUser(jwtDecode(data.access));
             localStorage.setItem("authTokens", JSON.stringify(data));
-            history.push("/");
+            if (window.history.state && window.history.state.idx > 0) {
+                // not sure why login creates 2 points in history
+                navigate(-2);
+            } else {
+                // the current entry in the history stack will be replaced with the new one
+                navigate('/', { replace: true }); 
+            }
         } else {
             alert("Something went wrong!");
         }
+
+        return data;
     };
 
     const registerUser = async (username, email, password) => {
@@ -61,18 +71,21 @@ export const AuthProvider = ({ children }) => {
                 password,
             })
         });
+        const data = await response.json();
         if (response.status === 201) {
-            history.push("/login");
+            navigate("/login");
         } else {
             alert("Something went wrong!");
         }
+
+        return data;
     };
 
     const logoutUser = () => {
         setAuthTokens(null);
         setUser(null);
         localStorage.removeItem("authTokens");
-        history.push("/");
+        navigate("/");
     };
 
     const contextData = {
@@ -87,7 +100,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (authTokens) {
-            setUser(jwt_decode(authTokens.access));
+            setUser(jwtDecode(authTokens.access));
         }
         setLoading(false);
     }, [authTokens, loading]);
