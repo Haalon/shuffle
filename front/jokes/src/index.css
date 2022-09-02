@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  --header-height: 50px
 }
 
 body {
@@ -10,9 +11,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+}
+
+#content {
+  margin-top: var(--header-height);
+  display: flex;
+}
+
+/* Works on Mozilla */
+* {
+  scrollbar-width: thin;
+  scrollbar-color:  #59606e #282c34;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track-piece {
+  background-color: #282c34;
+}
+
+*::-webkit-scrollbar-thumb:vertical {
+  height: 30px;
+  background-color: #59606e;
 }

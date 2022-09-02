@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Register from './components/Register';
 import Login from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
+import Navbar from './components/Navbar.js';
 
 import JokeDisplay from './components/JokeDisplay';
 
@@ -12,16 +13,17 @@ function App() {
   return (
 
     <AuthProvider>
-      
-        <Routes>
-          <Route element={<PrivateRoute/>} path="/jokes">
-            <Route path='/jokes' element={<JokeDisplay/>}/>
-          </Route>
-          <Route element={<Login/>} path="/login" />
-          <Route element={<Register/>} path="/register" />
-          <Route element={<CombinedJokeDisplay/>} path="/" />
-        </Routes>
-      
+        <Navbar/>
+        <div id="content">
+          <Routes>
+            <Route element={<PrivateRoute/>} path="/jokes">
+              <Route path='/jokes' element={<JokeDisplay/>}/>
+            </Route>
+            <Route element={<Login/>} path="/login" />
+            <Route element={<Register/>} path="/register" />
+            <Route element={<CombinedJokeDisplay/>} path="/" />
+          </Routes>
+        </div>
     </AuthProvider>
   );
 }

@@ -69,7 +69,7 @@ function CombinedJokeDisplay(props) {
     return (
         <div className="container">
 
-            <div className="button-section button-section--top">
+            <div className="button-section">
                 <div className={`button button_border_left ${getButtionHighlight('source')}`} onClick={e => setDisplay('source')}>
                     Source
                 </div>
