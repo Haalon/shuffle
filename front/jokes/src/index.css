@@ -12,6 +12,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+
+  background-color: #282c34;
+  color: aliceblue;
 }
 
 code {
@@ -27,6 +30,11 @@ code {
 #content {
   margin-top: var(--header-height);
   display: flex;
+  flex-grow: 1;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Works on Mozilla */
@@ -47,4 +55,63 @@ code {
 *::-webkit-scrollbar-thumb:vertical {
   height: 30px;
   background-color: #59606e;
+}
+
+/* margin/size/pad classes */
+
+.w100 {
+  width: 100%;
+}
+
+.w30 {
+  width: 30%;
+}
+
+.h100 {
+  height: 100%;
+}
+
+.pb240 {
+  padding-bottom: 240px;
+}
+
+/* font classes */
+
+.font-size3em {
+  font-size: 3em;
+}
+
+.font-size1_5em {
+  font-size: 1.5em;
+}
+
+/* grid classes */ 
+.grid12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+}
+
+/* flex classes */
+.flex-row {
+  display: flex;
+  flex-direction: row;;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-fill {
+  flex: auto;
+}
+
+.flex-grow1 {
+  flex-grow: 1;
 }

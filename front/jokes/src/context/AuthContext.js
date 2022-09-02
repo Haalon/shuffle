@@ -52,8 +52,6 @@ export const AuthProvider = ({ children }) => {
                 // the current entry in the history stack will be replaced with the new one
                 navigate('/', { replace: true }); 
             }
-        } else {
-            alert("Something went wrong!");
         }
 
         return data;
@@ -74,8 +72,6 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         if (response.status === 201) {
             navigate("/login");
-        } else {
-            alert("Something went wrong!");
         }
 
         return data;

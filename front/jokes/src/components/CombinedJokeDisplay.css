@@ -5,7 +5,6 @@
     flex-direction: column;
     justify-content: space-between;
     color: aliceblue;
-    background-color: #282c34;
     overflow-y: scroll;
     flex-grow: 1;
 }

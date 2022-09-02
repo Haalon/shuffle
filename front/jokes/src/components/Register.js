@@ -21,54 +21,48 @@ export default function Register() {
     return (
         <section>
             <form onSubmit={handleSubmit}>
-                <h1>Register</h1>
-                <hr />
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        onChange={e => setEmail(e.target.value)}
-                        placeholder="example@mail.com"
-                        required
-                    />
-                    <span style={{ color: "red" }}>{response["email"]}</span>
-                </div>
-                
-                <div>
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        onChange={e => setUsername(e.target.value)}
-                        placeholder="Username"
-                        required
-                    />
-                    <span style={{ color: "red" }}>{response["username"]}</span>
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        onChange={e => setPassword(e.target.value)}
-                        placeholder="Password"
-                        required
-                    />
-                    <span style={{ color: "red" }}>{response["password"]}</span>
-                </div>
-                <div>
-                    <label htmlFor="confirm-password">Confirm Password</label>
-                    <input
-                        type="password"
-                        id="confirm-password"
-                        onChange={e => setPassword2(e.target.value)}
-                        placeholder="Confirm Password"
-                        required
-                    />
-                    <p>{password2 !== password ? "Passwords do not match" : ""}</p>
-                </div>
-                <button disabled={password2 !== password}>Register</button>
+                <h3 className="">Register </h3>
+
+                <label htmlFor="email">Email</label>
+                <input
+                    type="text"
+                    id="email"
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="example@mail.com"
+                    required
+                />
+                <span style={{ color: "red" }} >{response["email"]}</span>
+
+                <label htmlFor="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    onChange={e => setUsername(e.target.value)}
+                    placeholder="Username"
+                    required
+                />
+                <span style={{ color: "red" }} >{response["username"]}</span>
+
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    onChange={e => setPassword(e.target.value)}
+                    placeholder="Password"
+                    required
+                />
+                <span style={{ color: "red" }} >{response["password"] || response["detail"]}</span>
+
+                <label htmlFor="confirm-password">Password</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    onChange={e => setPassword2(e.target.value)}
+                    placeholder="Confirm Password"
+                    required
+                />
+
+                <button disabled={!password || !password2 || password2 !== password}>Register</button>
             </form>
         </section>
     );
