@@ -7,16 +7,19 @@ const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
   return (
     <nav>
-        <div class="topnav">
+        <div className="topnav">
             <NavLink className="nav-item" to="/">Home</NavLink>
           {user ? (
             <>
               <NavLink className="nav-item" to="/jokes">Base Jokes</NavLink>
+
               <div className="fill-space"></div>
+              
               <button className="nav-item" onClick={logoutUser}>Logout</button>
             </>
           ) : (
             <>
+              <div className="fill-space"></div>
               <NavLink className="nav-item" to="/login">Login</NavLink>
               <NavLink className="nav-item" to="/register">Register</NavLink>
             </>
