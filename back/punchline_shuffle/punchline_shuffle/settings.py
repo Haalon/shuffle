@@ -28,12 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tk=v2b=19b1i^i8w+rij1n+3xf)!c%^%i$hjfjozhd4k(jdbz+'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.2.117', '188.32.124.25']
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", 'localhost 127.0.0.1').split(' ')
 
 
 # Application definition
@@ -104,12 +104,12 @@ WSGI_APPLICATION = 'punchline_shuffle.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': os.environ.get('MYSQL_DATABASE') or 'shuffle',
-        'USER': os.environ.get('MYSQL_USER') or 'root',
-        'PASSWORD': os.environ.get('MYSQL_PASSWORD') or 'secret',
-        'HOST': os.environ.get('MYSQL_HOST') or 'localhost',
-        'PORT': os.environ.get('MYSQL_PORT') or '3306',
+        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.mysql'), 
+        'NAME': os.environ.get('SQL_DATABASE', 'shuffle'),
+        'USER': os.environ.get('SQL_USER', 'root'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'secret'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '3306'),
     }
 }
 

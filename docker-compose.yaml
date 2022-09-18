@@ -13,6 +13,7 @@ services:
       - CHOKIDAR_USEPOLLING=true 
     depends_on:
       - back
+    
   back:
     build: ./back
     command: >
@@ -20,6 +21,8 @@ services:
              python manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
+    env_file:
+      - ./.env.dev
     environment: 
       MYSQL_PASSWORD: secret
       MYSQL_DATABASE: shuffle
@@ -28,6 +31,7 @@ services:
       MYSQL_PORT: 3306
     depends_on:
       - mysql
+    
   mysql:
     image: mysql:5.7
     command: --character-set-server=utf8mb4
