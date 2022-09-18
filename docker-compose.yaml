@@ -23,25 +23,19 @@ services:
       - 8000:8000
     env_file:
       - ./.env.dev
-    environment: 
-      MYSQL_PASSWORD: secret
-      MYSQL_DATABASE: shuffle
-      MYSQL_USER: root
-      MYSQL_HOST: mysql
-      MYSQL_PORT: 3306
     depends_on:
-      - mysql
-    
-  mysql:
-    image: mysql:5.7
-    command: --character-set-server=utf8mb4
+      - db
+
+  db:
+    image: postgres:12.0-alpine
     volumes:
-      - shuffle-mysql-data:/var/lib/mysql
-    environment: 
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: shuffle
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=shuffle
     ports:
-      - 3306:3306
+      - 5432:5432
 
 volumes:
-  shuffle-mysql-data:
+  postgres_data:

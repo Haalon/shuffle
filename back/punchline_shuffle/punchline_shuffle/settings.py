@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = int(os.environ.get("DEBUG", default=1))
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", 'localhost 127.0.0.1').split(' ')
 
@@ -104,12 +104,12 @@ WSGI_APPLICATION = 'punchline_shuffle.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.mysql'), 
+        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.postgresql'), 
         'NAME': os.environ.get('SQL_DATABASE', 'shuffle'),
         'USER': os.environ.get('SQL_USER', 'root'),
         'PASSWORD': os.environ.get('SQL_PASSWORD', 'secret'),
         'HOST': os.environ.get('SQL_HOST', 'localhost'),
-        'PORT': os.environ.get('SQL_PORT', '3306'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
 
@@ -150,7 +150,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
