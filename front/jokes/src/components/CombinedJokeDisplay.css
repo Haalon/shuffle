@@ -48,24 +48,18 @@
 
 .display {
     text-align: center;
-    /* overflow-y: scroll; */
     padding: 4vmin;
     font-family: 'Lobster';
     white-space: pre-line;
-    font-size: 8vmin;
-    /* height: 85vh; */
+    font-size: 3rem;
 }
 
 .button-section {
     width: 100%;
    
-    min-height: 15vh;
+    min-height: 15rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
-
-.button-section--bottom {
-    background: linear-gradient(#282c34, #16181d);
 }

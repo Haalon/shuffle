@@ -29,10 +29,12 @@
     font-size: 17px;
     background-color: #16181d;
     border: none;
+    transition: background-color 300ms linear;
 }
 
 .nav-item:hover {
     background-color: #303744;
+    transition: background-color 300ms linear;
     /* color: black; */
 }
 
