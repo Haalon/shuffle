@@ -9,7 +9,7 @@ import {
 function CombinedJokeDisplay(props) {
     const [lang] = useState('RU');
     const [combinedJoke, setCombinedJoke] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [animState, setAnimState] = useState(false);
     const [display, setDisplay] = useState('combined')
     const api = useApi();
 
@@ -58,11 +58,13 @@ function CombinedJokeDisplay(props) {
 
     const nodeRef = useRef(null);
     const generateNewCombinedJoke = async () => {
-        setIsLoading(true);
+        // we switch anim state
+        // that causes enter animation if true, exit if false
+        // but wwe use the same transitions for both
+        setAnimState(!animState);
         const result = await api.generateCombinedJoke(lang);
         setDisplay('combined')
         setCombinedJoke(result);
-        setTimeout(() => setIsLoading(false), 300);
         
     }
 
@@ -88,14 +90,11 @@ function CombinedJokeDisplay(props) {
                     Destination
                 </div>
             </div>
-            <div className="flex-row flex-center">
-                <div className="button button_border_single" onClick={e => generateNewCombinedJoke()}>
-                    Generate new Joke
-                </div>
-            </div>
-            <CSSTransition nodeRef={nodeRef} in={isLoading} timeout={300} classNames="display">
-                <div ref={nodeRef} className="display">
-                    {getText()}
+            <CSSTransition nodeRef={nodeRef} in={animState} timeout={300} classNames="display">
+                <div ref={nodeRef} className="display" onClick={e => generateNewCombinedJoke()}>
+                    <div>
+                        {getText()}
+                    </div>
                 </div>
             </CSSTransition>
             
