@@ -18,30 +18,15 @@
     background-color: #303744;
     color: aliceblue;
     padding: 12px;
-    border-radius: 3vmin;
+    border-radius: 2rem;
     user-select: none;
+    cursor: pointer;
 }
 
 .button:hover {
-    background-color: #485264;
+    transition: background-color 200ms ease-in;
+    background-color: #494f5a;
 }
-
-.button_border_left {
-    border-radius: 3vmin 0 0 3vmin;
-}
-
-.button_border_right {
-    border-radius: 0 3vmin 3vmin 0;
-}
-
-.button_border_single {
-    border-radius: 3vmin;
-}
-
-.button_border_center {
-    border-radius: 0;
-}
-
 .button-highlight {
     background-color: #59606e;
 }
@@ -52,14 +37,24 @@
     font-family: 'Lobster';
     white-space: pre-line;
     font-size: 3rem;
+    cursor: pointer;
 }
 
-.button-section {
-    width: 100%;
-   
-    min-height: 15rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.display-enter {
+    opacity: 0;
+    transform: translateX(-200px);
+    filter: blur(5px);
+  }
+.display-enter-active {
+    opacity: 1;
+    transform: translateX(0px);
+    filter: blur(0px);
+    transition: all 300ms;
 }
+/* .display-exit {
+    opacity: 1;
+}
+.display-exit-active {
+    opacity: 0;
+    transition: opacity 200ms;
+} */

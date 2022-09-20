@@ -25,7 +25,6 @@ const Navbar = () => {
             </>
           )}
         </div>
-        <div className="shadow"></div>
     </nav>
   );
 };
