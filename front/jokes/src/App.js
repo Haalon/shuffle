@@ -1,13 +1,13 @@
 import './App.css';
 import CombinedJokeDisplay from './components/CombinedJokeDisplay.js'
 import { AuthProvider } from "./context/AuthContext";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import Register from './components/Register';
 import Login from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
 import Navbar from './components/Navbar.js';
 
-import JokeDisplay from './components/JokeDisplay';
+import { JokeDisplay, SingleJokeDisplay} from './components/JokeDisplay';
 
 function App() {
   return (
@@ -16,9 +16,14 @@ function App() {
         <Navbar/>
         <div id="content">
           <Routes>
+
             <Route element={<PrivateRoute/>} path="/jokes">
-              <Route path='/jokes' element={<JokeDisplay/>}/>
+              <Route path='/jokes' element={<Outlet/>}>
+                <Route path=":pk" element={ <SingleJokeDisplay /> } />
+                <Route path="" element={ <JokeDisplay /> } />
+              </Route>
             </Route>
+
             <Route element={<Login/>} path="/login" />
             <Route element={<Register/>} path="/register" />
             <Route element={<CombinedJokeDisplay/>} path="/" />

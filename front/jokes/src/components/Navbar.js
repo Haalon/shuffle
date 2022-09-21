@@ -8,10 +8,10 @@ const Navbar = () => {
   return (
     <nav>
         <div className="topnav">
-            <NavLink className="nav-item" to="/">Home</NavLink>
+            <NavLink className="nav-item" to="/" end>Home</NavLink>
           {user ? (
             <>
-              <NavLink className="nav-item" to="/jokes">Base Jokes</NavLink>
+              <NavLink className="nav-item" end to="/jokes">Base Jokes</NavLink>
 
               <div className="fill-space"></div>
               
