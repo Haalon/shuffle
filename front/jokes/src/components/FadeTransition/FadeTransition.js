@@ -37,7 +37,7 @@ function FadeTransition(props) {
         exitActive: classes.end_transition,
     }
 
-    return <CSSTransition nodeRef={props.nodeRef} in={props.animSwitch} timeout={props.duration} classNames={classNames} appear={props.appear}>
+    return <CSSTransition nodeRef={props.nodeRef} in={props.animSwitch} timeout={props.duration + props.delay} classNames={classNames} appear={props.appear}>
         {props.children}
     </CSSTransition>
 }

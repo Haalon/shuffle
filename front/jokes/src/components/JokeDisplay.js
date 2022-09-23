@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useApi } from "../api/useApi";
@@ -42,6 +43,8 @@ export function SingleJokeDisplay() {
 export function JokeDisplay() {
   const [res, setRes] = useState([]);
   const api = useApi();
+  let itemsRefs = useRef([]);
+  itemsRefs.current = res.map((element, i) => itemsRefs.current[i] ?? React.createRef());
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,15 +56,14 @@ export function JokeDisplay() {
       }
     };
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const items = res.map(data => {
-    return <Link className={`${styles.joke_item}`} to={`${data.pk}`} key={data.pk} >
-      {/* <div className={`${styles.joke_item}`}> */}
+  const items = res.map((data, i) => {
+    return <FadeTransition nodeRef={itemsRefs.current[i]} duration={300} delay={i*30} key={data.pk} transform='scale(1.5)'>
+      <Link className={`${styles.joke_item}`} ref={itemsRefs.current[i]} to={`${data.pk}`}  >
         {data.body.replace(/\{|\}/g, ``)}
-      {/* </div> */}
-    </Link>
+      </Link>
+    </FadeTransition>
   })
 
   return (
