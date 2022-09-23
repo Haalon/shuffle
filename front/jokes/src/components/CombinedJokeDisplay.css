@@ -60,6 +60,7 @@
 }
 
 .display-enter:hover,
+.display-appear,
 .display-enter {
     opacity: 0;
     transform: translateX(-200px);
@@ -67,6 +68,7 @@
 }
 
 .display-enter-active:hover,
+.display-appear-active,
 .display-enter-active {
     opacity: 1;
     transform: translateX(0px);

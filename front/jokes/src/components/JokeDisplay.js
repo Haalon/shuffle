@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useApi } from "../api/useApi";
+import FadeTransition from "./FadeTransition/FadeTransition";
 import styles from "./JokeDisplay.module.css"
 
 
@@ -22,17 +23,19 @@ export function SingleJokeDisplay() {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pk]);
-
+  const nodeRef = useRef(null);
   let text;
   if (!res) text = "Loading";
   else text = res.body.replace(/\{|\}/g, ``);
 
   return (
-    <div className={`${styles.joke_container}`}>
-      <div className={`${styles.single_joke_item}`}>
-        {text}
+    <FadeTransition nodeRef={nodeRef} duration={300}>
+      <div ref={nodeRef} className={`${styles.joke_container}`}>
+        <div className={`${styles.single_joke_item}`}>
+          {text}
+        </div>
       </div>
-    </div>
+    </FadeTransition>
   );
 }
 

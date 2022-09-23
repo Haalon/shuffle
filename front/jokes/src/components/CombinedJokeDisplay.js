@@ -1,9 +1,7 @@
 import './CombinedJokeDisplay.css';
 import { useState, useEffect, useRef } from 'react';
 import { useApi } from '../api/useApi';
-import {
-    CSSTransition,
-  } from 'react-transition-group';
+import FadeTransition from './FadeTransition/FadeTransition';
 
 
 function CombinedJokeDisplay(props) {
@@ -72,13 +70,12 @@ function CombinedJokeDisplay(props) {
         generateNewCombinedJoke();
     }, [])
 
-    if (!combinedJoke) return <div>Not loaded yet</div>;
+    if (!combinedJoke) return <div></div>;
 
     
 
     return (
         <div className="container">
-
             <div className="flex-row flex-center">
                 <div className={`button button_border_single ${getButtionHighlight('source')}`} onClick={e => setDisplay('source')}>
                     Source
@@ -90,16 +87,13 @@ function CombinedJokeDisplay(props) {
                     Destination
                 </div>
             </div>
-            <CSSTransition nodeRef={nodeRef} in={animState} timeout={300} classNames="display">
+            <FadeTransition nodeRef={nodeRef} animSwitch={animState} duration={300}>
                 <div ref={nodeRef} className="display" onClick={e => generateNewCombinedJoke()}>
                     <div>
                         {getText()}
                     </div>
                 </div>
-            </CSSTransition>
-            
-
-            
+            </FadeTransition>
         </div>
     )
 }
