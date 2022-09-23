@@ -4,8 +4,8 @@ const API_URL = 'http://127.0.0.1:8000';
 export function useApi() {
     const axios = useAxios()
 
-    const listJokes = () => {
-        const url = `${API_URL}/api/jokes/`;
+    const listJokes = (page) => {
+        const url = page ? `${API_URL}/api/jokes/?page=${page}` : `${API_URL}/api/jokes/`;
         return axios.get(url).then(response => response.data);
     }
 
