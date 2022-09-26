@@ -56,13 +56,14 @@ function CombinedJokeDisplay(props) {
 
     const nodeRef = useRef(null);
     const generateNewCombinedJoke = async () => {
+        
+        const result = await api.generateCombinedJoke(lang);
+        setDisplay('combined')
+        setCombinedJoke(result);
         // we switch anim state
         // that causes enter animation if true, exit if false
         // but wwe use the same transitions for both
         setAnimState(!animState);
-        const result = await api.generateCombinedJoke(lang);
-        setDisplay('combined')
-        setCombinedJoke(result);
         
     }
 
