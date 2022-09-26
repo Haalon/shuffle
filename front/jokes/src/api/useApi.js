@@ -14,6 +14,11 @@ export function useApi() {
         return axios.get(url).then(response => response.data);
     }
 
+    const createJoke = (body) => {
+        const url = `${API_URL}/api/jokes/`;
+        return axios.post(url, body).then(response => response.data);
+    }
+
     const listCombinedJokes = () => {
         const url = `${API_URL}/api/combined_jokes/`;
         return axios.get(url).then(response => response.data);
@@ -43,6 +48,7 @@ export function useApi() {
         listCombinedJokes,
         getCombinedJoke,
         generateCombinedJoke,
-        reactCombinedJoke
+        reactCombinedJoke,
+        createJoke
     }
 }

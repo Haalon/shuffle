@@ -8,6 +8,7 @@ import PrivateRoute from './utils/PrivateRoute';
 import Navbar from './components/Navbar.js';
 
 import { JokeDisplay, SingleJokeDisplay} from './components/JokeDisplay';
+import Submit from './components/Submit';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
                 <Route path="" element={ <JokeDisplay /> } />
               </Route>
             </Route>
+
+            <Route element={<Submit/>} path="/submit" />
 
             <Route element={<Login/>} path="/login" />
             <Route element={<Register/>} path="/register" />

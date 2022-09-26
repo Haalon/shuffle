@@ -12,6 +12,7 @@ const Navbar = () => {
           {user ? (
             <>
               <NavLink className="nav-item" end to="/jokes">Base Jokes</NavLink>
+              <NavLink className="nav-item" end to="/submit">Submit Joke</NavLink>
 
               <div className="fill-space"></div>
               
