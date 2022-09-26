@@ -1,12 +1,14 @@
 from django.db import models
 import re
 
+PUNCHLINE_RE = re.compile(r"(?s){(.*?)}")
+
 class Joke(models.Model):
     class Language(models.TextChoices):
         ENGLISH = 'ENG', 'English'
         RUSSIAN = 'RU', 'Русский'
 
-    body = models.TextField()
+    body = models.TextField(unique=True)
     created = models.DateTimeField(auto_now=True)
 
     use_as_source = models.BooleanField(
@@ -27,10 +29,10 @@ class Joke(models.Model):
 
     @property
     def punchline(self):
-        return re.search(r"{(.*)}(?s)", self.body).group(1)
+        return re.search(PUNCHLINE_RE, self.body).group(1)
 
     def replace_punchline(self, new_punchline):
-        return re.sub(r"{.*}(?s)", new_punchline, self.body)
+        return re.sub(PUNCHLINE_RE, new_punchline, self.body)
     
     def __str__(self):
         return self.body
