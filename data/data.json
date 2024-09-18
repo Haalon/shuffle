@@ -1446,7 +1446,18 @@
         "use_as_destination": true,
         "capitalize": true,
         "lang": "RU"
-      }
+      }, 
+      {
+      "model": "jokes.joke",
+      "pk": 41,
+      "fields": {
+        "body": "Смотри какая красивая лошадь! Это не лошадь, а свинья! Да? {А почему у неё рога}?",
+        "created": "2024-09-19T15:2:14.904Z",
+        "use_as_source": true,
+        "use_as_destination": true,
+        "capitalize": true,
+        "lang": "RU"
+      }, 
     },
     {
       "model": "jokes.combinedjoke",
